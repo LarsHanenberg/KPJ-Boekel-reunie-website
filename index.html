@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./qrcode.js"></script>
 </head>
 <body>
 <x-dc>
@@ -26,7 +27,10 @@
   <!-- HEADER -->
   <header style="position: sticky; top: 0; z-index: 20; background: #FFFDF9; border-bottom: 1px solid #EAE3D9; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
     <img src="uploads/Logo.jpg" alt="Logo KPJ Boekel" style="height: 40px; width: auto; object-fit: contain;" />
-    <a href="#inschrijven" style="background: #6B2C91; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 10px 18px; border-radius: 999px; text-decoration: none; white-space: nowrap;">Schrijf je in</a>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <a href="mailto:kpjboekel@gmail.com" style="color: #6B2C91; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap;">Contact</a>
+      <a href="#inschrijven" style="background: #6B2C91; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 10px 18px; border-radius: 999px; text-decoration: none; white-space: nowrap;">Schrijf je in</a>
+    </div>
   </header>
 
   <!-- HERO -->
@@ -34,7 +38,8 @@
     <div style="padding: 48px 24px 56px; max-width: 720px; margin: 0 auto; width: 100%; text-align: center;">
       <p style="color: #F4C430; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 15px; margin: 0 0 12px;">Handbalclub KPJ Boekel</p>
       <h1 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(36px, 8vw, 64px); color: #FFFFFF; margin: 0 0 16px; line-height: 1.1;">Reünie KPJ Boekel</h1>
-      <p style="color: #F4EFE6; font-size: clamp(18px, 3vw, 22px); margin: 0 0 28px; font-weight: 600;">10 april 2027 &nbsp;&middot;&nbsp; locatie volgt</p>
+      <p style="color: #F4EFE6; font-size: clamp(18px, 3vw, 22px); margin: 0 0 16px; font-weight: 600;">10 april 2027 &nbsp;&middot;&nbsp; Het Boekels Ven, Boekel</p>
+      <p style="margin: 0 0 28px;"><span style="display: inline-block; background: rgba(244,196,48,0.15); border: 1px solid #F4C430; color: #F4C430; font-weight: 700; font-size: 15px; padding: 8px 18px; border-radius: 999px;">Deelname: €10 per persoon</span></p>
       <a href="#inschrijven" style="display: inline-block; background: #F4C430; color: #3A1A52; font-weight: 700; font-size: 18px; padding: 16px 36px; border-radius: 999px; text-decoration: none; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">Schrijf je in</a>
     </div>
   </section>
@@ -62,11 +67,19 @@
         </div>
         <div style="background: #FFFFFF; border-radius: 16px; padding: 28px 24px; border-top: 4px solid #6B2C91;">
           <p style="margin: 0 0 6px; font-weight: 700; color: #6B2C91; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Locatie</p>
-          <p style="margin: 0; font-size: 20px; font-weight: 600;">Adres volgt binnenkort, Boekel</p>
+          <p style="margin: 0; font-size: 20px; font-weight: 600;">Het Boekels Ven<br>Peelstraat 28, 5427 EG Boekel</p>
         </div>
         <div style="background: #FFFFFF; border-radius: 16px; padding: 28px 24px; border-top: 4px solid #F4C430;">
           <p style="margin: 0 0 6px; font-weight: 700; color: #6B2C91; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Inbegrepen bij €10</p>
           <p style="margin: 0; font-size: 20px; font-weight: 600;">Hapjes, drankjes en veel gezelligheid</p>
+        </div>
+      </div>
+
+      <!-- KAART + ROUTE -->
+      <div style="margin-top: 28px; background: #FFFFFF; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 16px rgba(58,26,82,0.08);">
+        <iframe title="Kaart – Het Boekels Ven, Peelstraat 28 Boekel" src="https://maps.google.com/maps?q=Peelstraat%2028,%205427%20EG%20Boekel&z=15&output=embed" loading="lazy" style="width: 100%; height: 300px; border: 0; display: block;"></iframe>
+        <div style="padding: 18px 20px; text-align: center;">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Peelstraat+28,+5427+EG+Boekel" target="_blank" rel="noopener" style="display: inline-block; background: #6B2C91; color: #FFFFFF; font-weight: 700; font-size: 16px; padding: 12px 28px; border-radius: 999px; text-decoration: none;">Route in Google Maps</a>
         </div>
       </div>
     </div>
@@ -114,45 +127,177 @@
   <section id="inschrijven" style="background: #3A1A52; padding: 72px 24px;">
     <div style="max-width: 560px; margin: 0 auto;">
       <h2 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(28px, 4vw, 36px); color: #FFFFFF; margin: 0 0 12px; text-align: center;">Inschrijven</h2>
-      <p style="color: #E4D5EE; text-align: center; font-size: 18px; margin: 0 0 32px;">Deelname kost <strong style="color: #F4C430;">€10 per persoon</strong>.</p>
 
-      <form onSubmit="{{ onSubmit }}" style="display: flex; flex-direction: column; gap: 18px; background: #FFFFFF; border-radius: 20px; padding: 32px 24px;">
+      <!-- FORMULIER (zichtbaar vóór inschrijven) -->
+      <sc-if value="{{ !submitted }}">
+      <p style="color: #E4D5EE; text-align: center; font-size: 18px; margin: 0 0 10px;">Vul je gegevens in om je aan te melden.</p>
+      <p style="text-align: center; margin: 0 0 28px;"><span style="display: inline-block; background: #F4C430; color: #3A1A52; font-weight: 700; font-size: 18px; padding: 8px 22px; border-radius: 999px;">€10 per persoon</span></p>
+
+      <form onsubmit="{{ onSubmit }}" style="display: flex; flex-direction: column; gap: 18px; background: #FFFFFF; border-radius: 20px; padding: 32px 24px;">
+
+        <!-- Geslacht -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-weight: 600; font-size: 16px;">Geslacht</span>
+          <div style="display: flex; gap: 24px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 16px;">
+              <input type="radio" name="geslacht_hoofd" value="man" checked="{{ hoofdIsMan }}" onchange="{{ onHoofdGeslacht }}" required="{{ true }}" style="width: 18px; height: 18px;" /> Man
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 16px;">
+              <input type="radio" name="geslacht_hoofd" value="vrouw" checked="{{ hoofdIsVrouw }}" onchange="{{ onHoofdGeslacht }}" required="{{ true }}" style="width: 18px; height: 18px;" /> Vrouw
+            </label>
+          </div>
+        </div>
+
+        <sc-if value="{{ hoofdIsVrouw }}">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
+            Meisjesachternaam
+            <input type="text" name="meisjesachternaam" placeholder="Achternaam vóór trouwen" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+          </label>
+        </sc-if>
+
         <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
-          Naam
-          <input type="text" name="naam" required="" placeholder="Voor- en achternaam" style="font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+          Voor- en achternaam
+          <input type="text" name="naam" required="{{ true }}" placeholder="Voor- en achternaam" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
+          Geboortedatum
+          <input type="date" name="geboortedatum" required="{{ true }}" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
         </label>
         <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
           E-mailadres
-          <input type="email" name="email" required="" placeholder="naam@voorbeeld.nl" style="font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+          <input type="email" name="email" required="{{ true }}" placeholder="naam@voorbeeld.nl" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
+          Telefoonnummer
+          <input type="tel" name="telefoon" required="{{ true }}" placeholder="06 12345678" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
         </label>
         <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
           Aantal personen
-          <input type="number" name="aantal" min="1" defaultValue="1" required="" style="font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+          <input type="number" name="aantal" min="1" max="20" value="{{ aantal }}" oninput="{{ onAantal }}" required="{{ true }}" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
         </label>
+
+        <!-- Adres hoofdaanmelder -->
         <div style="display: flex; flex-wrap: wrap; gap: 12px;">
           <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px; flex: 2 1 200px;">
             Straatnaam en huisnummer
-            <input type="text" name="straat" required="" placeholder="Kerkstraat 12" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+            <input type="text" name="straat" required="{{ true }}" placeholder="Kerkstraat 12" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
           </label>
           <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px; flex: 1 1 130px;">
             Postcode
-            <input type="text" name="postcode" required="" placeholder="5427 AB" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+            <input type="text" name="postcode" required="{{ true }}" placeholder="5427 AB" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
           </label>
         </div>
         <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
           Woonplaats
-          <input type="text" name="woonplaats" required="" placeholder="Boekel" style="font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+          <input type="text" name="woonplaats" required="{{ true }}" placeholder="Boekel" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
         </label>
-        <button type="submit" style="background: #F4C430; color: #3A1A52; font-weight: 700; font-size: 18px; padding: 16px; border-radius: 999px; border: none; cursor: pointer; margin-top: 8px;">Inschrijven</button>
-        <sc-if value="{{ submitted }}">
-          <p style="margin: 0; color: #2F7A3D; font-weight: 600; text-align: center;">Bedankt voor je inschrijving!</p>
-        </sc-if>
-      </form>
 
-      <div style="background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-top: 24px; color: #F4EFE6;">
-        <p style="margin: 0 0 8px; font-weight: 700; color: #F4C430;">Betaalinstructie</p>
-        <p style="margin: 0; font-size: 16px;">Maak €10 per persoon over naar <strong>NL00 BANK 0123 4567 89</strong> t.n.v. <strong>KPJ Boekel</strong>, onder vermelding van je naam.</p>
-      </div>
+        <!-- Extra personen -->
+        <sc-for list="{{ extra }}" as="p">
+          <div style="border: 1px solid #E4D5EE; border-radius: 14px; padding: 20px 18px; display: flex; flex-direction: column; gap: 16px; background: #FCFAFF;">
+            <p style="margin: 0; font-weight: 700; color: #6B2C91; font-size: 15px; text-transform: uppercase; letter-spacing: 0.05em;">Persoon {{ p.nr }}</p>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-weight: 600; font-size: 16px;">Geslacht</span>
+              <div style="display: flex; gap: 24px;">
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 16px;">
+                  <input type="radio" name="{{ p.naamGeslacht }}" value="man" checked="{{ p.isMan }}" onchange="{{ p.onGeslacht }}" required="{{ true }}" style="width: 18px; height: 18px;" /> Man
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 16px;">
+                  <input type="radio" name="{{ p.naamGeslacht }}" value="vrouw" checked="{{ p.isVrouw }}" onchange="{{ p.onGeslacht }}" required="{{ true }}" style="width: 18px; height: 18px;" /> Vrouw
+                </label>
+              </div>
+            </div>
+
+            <sc-if value="{{ p.isVrouw }}">
+              <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
+                Meisjesachternaam
+                <input type="text" placeholder="Achternaam vóór trouwen" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+              </label>
+            </sc-if>
+
+            <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
+              Voor- en achternaam
+              <input type="text" required="{{ true }}" placeholder="Voor- en achternaam" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
+              Geboortedatum
+              <input type="date" required="{{ true }}" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
+              Telefoonnummer
+              <input type="tel" placeholder="06 12345678" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+            </label>
+
+            <label style="display: flex; align-items: center; gap: 10px; font-size: 15px;">
+              <input type="checkbox" checked="{{ p.zelfdeAdres }}" onchange="{{ p.onZelfde }}" style="width: 18px; height: 18px; flex-shrink: 0;" /> Zelfde adres als de hoofdaanmelder
+            </label>
+
+            <sc-if value="{{ p.anderAdres }}">
+              <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                  <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px; flex: 2 1 200px;">
+                    Straatnaam en huisnummer
+                    <input type="text" required="{{ true }}" placeholder="Kerkstraat 12" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+                  </label>
+                  <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px; flex: 1 1 130px;">
+                    Postcode
+                    <input type="text" required="{{ true }}" placeholder="5427 AB" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+                  </label>
+                </div>
+                <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
+                  Woonplaats
+                  <input type="text" required="{{ true }}" placeholder="Boekel" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+                </label>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+
+        <!-- Totaal -->
+        <div style="background: #F5EFE3; border-radius: 12px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 17px;">
+          <span style="color: #4A3F4E;">Totaal ({{ aantal }} × €10)</span>
+          <strong style="color: #3A1A52; font-size: 20px;">€ {{ bedragTekst }}</strong>
+        </div>
+
+        <!-- Algemene voorwaarden -->
+        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #4A3F4E; line-height: 1.4;">
+          <input type="checkbox" name="voorwaarden" required="{{ true }}" style="width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0;" />
+          <span>Ik ga akkoord met de algemene voorwaarden en geef toestemming dat mijn gegevens worden opgeslagen en gebruikt voor de organisatie van de reünie.</span>
+        </label>
+
+        <button type="submit" style="background: #F4C430; color: #3A1A52; font-weight: 700; font-size: 18px; padding: 16px; border-radius: 999px; border: none; cursor: pointer; margin-top: 8px;">Inschrijven</button>
+      </form>
+      </sc-if>
+
+      <!-- BETAALPAGINA (zichtbaar ná inschrijven) -->
+      <sc-if value="{{ submitted }}">
+        <div style="background: #FFFFFF; border-radius: 20px; padding: 36px 24px; text-align: center;">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: #E7F5EA; color: #2F7A3D; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; margin: 0 auto 16px;">✓</div>
+          <h3 style="font-family: 'Fraunces', serif; color: #4E1F6B; font-size: 24px; margin: 0 0 8px;">Bedankt, {{ naamHoofd }}!</h3>
+          <p style="margin: 0 0 4px; font-size: 17px;">Je inschrijving is genoteerd.</p>
+          <p style="margin: 0 0 24px; color: #6A5A75;">Rond je deelname af door het bedrag over te maken.</p>
+
+          <div style="background: #F5EFE3; border-radius: 16px; padding: 20px; margin: 0 0 24px;">
+            <p style="margin: 0 0 4px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: #6B2C91; font-weight: 700;">Te betalen</p>
+            <p style="margin: 0; font-family: 'Fraunces', serif; font-size: 36px; font-weight: 700; color: #3A1A52;">€ {{ bedragTekst }}</p>
+            <p style="margin: 6px 0 0; color: #6A5A75; font-size: 14px;">{{ aantal }} × €10</p>
+          </div>
+
+          <sc-if value="{{ qrSrc }}">
+            <p style="font-weight: 700; color: #4E1F6B; margin: 0 0 10px;">Scan met je bankapp</p>
+            <img src="{{ qrSrc }}" alt="QR-code voor betaling" style="width: 200px; height: 200px; image-rendering: pixelated; border: 1px solid #EAE3D9; border-radius: 12px; padding: 6px; background: #FFFFFF;" />
+            <p style="margin: 18px 0 6px; color: #6A5A75;">of maak handmatig over naar:</p>
+          </sc-if>
+
+          <div style="text-align: left; max-width: 380px; margin: 0 auto; background: #F8F5FF; border-radius: 12px; padding: 16px 18px;">
+            <p style="margin: 0 0 10px;"><span style="color: #6A5A75; font-size: 13px;">IBAN</span><br><strong style="font-size: 18px; letter-spacing: 0.02em;">{{ iban }}</strong></p>
+            <p style="margin: 0 0 10px;"><span style="color: #6A5A75; font-size: 13px;">T.n.v.</span><br><strong>{{ begunstigde }}</strong></p>
+            <p style="margin: 0;"><span style="color: #6A5A75; font-size: 13px;">Omschrijving</span><br><strong>{{ omschrijving }}</strong></p>
+          </div>
+          <p style="margin: 16px 0 0; font-size: 13px; color: #9A87A6;">De QR-code werkt automatisch zodra het definitieve rekeningnummer is ingevuld.</p>
+        </div>
+      </sc-if>
     </div>
   </section>
 
@@ -167,14 +312,103 @@
 
 </x-dc>
 <script type="text/x-dc" data-dc-script>
+// ============================================================
+//  INSTELLINGEN — pas hier het rekeningnummer aan
+// ============================================================
+const IBAN = "NL00 BANK 0123 4567 89";   // <-- vervang door het echte IBAN
+const BEGUNSTIGDE = "KPJ Boekel";        // naam op de rekening
+const PRIJS_PP = 10;                     // prijs per persoon in euro
+// ============================================================
+
+function epcPayload(iban, naam, bedrag, omschrijving) {
+  const ibanClean = String(iban).replace(/\s+/g, "").toUpperCase();
+  return [
+    "BCD", "002", "1", "SCT", "",
+    naam,
+    ibanClean,
+    "EUR" + bedrag.toFixed(2),
+    "", "",
+    omschrijving
+  ].join("\n");
+}
+
+function qrDataUrl(text) {
+  try {
+    if (typeof window === "undefined" || !window.qrcode) return "";
+    const qr = window.qrcode(0, "M");
+    qr.addData(text);
+    qr.make();
+    return qr.createDataURL(5, 4);
+  } catch (e) {
+    return "";
+  }
+}
+
 class Component extends DCLogic {
-  state = { submitted: false };
+  state = {
+    submitted: false,
+    aantal: 1,
+    hoofdGeslacht: "",
+    extra: [],        // [{ geslacht: "", zelfdeAdres: true }]
+    naamHoofd: ""
+  };
+
+  setAantal(raw) {
+    let a = parseInt(raw, 10);
+    if (isNaN(a) || a < 1) a = 1;
+    if (a > 20) a = 20;
+    const nExtra = a - 1;
+    const extra = this.state.extra.slice(0, nExtra);
+    while (extra.length < nExtra) extra.push({ geslacht: "", zelfdeAdres: true });
+    this.setState({ aantal: a, extra });
+  }
+
+  updateExtra(i, patch) {
+    const extra = this.state.extra.map((p, j) => j === i ? { ...p, ...patch } : p);
+    this.setState({ extra });
+  }
+
   renderVals() {
+    const bedrag = this.state.aantal * PRIJS_PP;
+    const extra = this.state.extra.map((p, i) => ({
+      nr: i + 2,
+      geslacht: p.geslacht,
+      isMan: p.geslacht === "man",
+      isVrouw: p.geslacht === "vrouw",
+      zelfdeAdres: p.zelfdeAdres,
+      anderAdres: !p.zelfdeAdres,
+      naamGeslacht: "geslacht_p" + i,
+      onGeslacht: (e) => this.updateExtra(i, { geslacht: e.target.value }),
+      onZelfde: (e) => this.updateExtra(i, { zelfdeAdres: e.target.checked })
+    }));
+
+    const omschrijving = ("Reunie KPJ Boekel" + (this.state.naamHoofd ? " - " + this.state.naamHoofd : "")).slice(0, 140);
+
     return {
       submitted: this.state.submitted,
+      aantal: this.state.aantal,
+      hoofdGeslacht: this.state.hoofdGeslacht,
+      hoofdIsMan: this.state.hoofdGeslacht === "man",
+      hoofdIsVrouw: this.state.hoofdGeslacht === "vrouw",
+      extra: extra,
+      bedragTekst: bedrag.toFixed(2).replace(".", ","),
+      naamHoofd: this.state.naamHoofd,
+      iban: IBAN,
+      begunstigde: BEGUNSTIGDE,
+      omschrijving: omschrijving,
+      qrSrc: this.state.submitted ? qrDataUrl(epcPayload(IBAN, BEGUNSTIGDE, bedrag, omschrijving)) : "",
+      onHoofdGeslacht: (e) => this.setState({ hoofdGeslacht: e.target.value }),
+      onAantal: (e) => this.setAantal(e.target.value),
       onSubmit: (e) => {
         e.preventDefault();
-        this.setState({ submitted: true });
+        const f = e.currentTarget;
+        const el = f.querySelector('input[name="naam"]');
+        const naam = el ? el.value : "";
+        this.setState({ submitted: true, naamHoofd: naam });
+        setTimeout(() => {
+          const sec = document.getElementById("inschrijven");
+          if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 60);
       }
     };
   }
