@@ -159,10 +159,23 @@
           Voor- en achternaam
           <input type="text" name="naam" required="{{ true }}" placeholder="Voor- en achternaam" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
         </label>
-        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
-          Geboortedatum
-          <input type="date" name="geboortedatum" required="{{ true }}" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
-        </label>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-weight: 600; font-size: 16px;">Geboortedatum</span>
+          <div style="display: flex; gap: 10px;">
+            <select name="geb_dag" required="{{ true }}" style="flex: 1 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
+              <option value="">Dag</option>
+              <sc-for list="{{ dagen }}" as="d"><option value="{{ d }}">{{ d }}</option></sc-for>
+            </select>
+            <select name="geb_maand" required="{{ true }}" style="flex: 1.5 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
+              <option value="">Maand</option>
+              <sc-for list="{{ maanden }}" as="m"><option value="{{ m.n }}">{{ m.naam }}</option></sc-for>
+            </select>
+            <select name="geb_jaar" required="{{ true }}" style="flex: 1.1 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
+              <option value="">Jaar</option>
+              <sc-for list="{{ jaren }}" as="j"><option value="{{ j }}">{{ j }}</option></sc-for>
+            </select>
+          </div>
+        </div>
         <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
           E-mailadres
           <input type="email" name="email" required="{{ true }}" placeholder="naam@voorbeeld.nl" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
@@ -220,10 +233,23 @@
               Voor- en achternaam
               <input type="text" required="{{ true }}" placeholder="Voor- en achternaam" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
             </label>
-            <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
-              Geboortedatum
-              <input type="date" required="{{ true }}" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
-            </label>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-weight: 600; font-size: 16px;">Geboortedatum</span>
+              <div style="display: flex; gap: 10px;">
+                <select required="{{ true }}" style="flex: 1 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
+                  <option value="">Dag</option>
+                  <sc-for list="{{ dagen }}" as="d"><option value="{{ d }}">{{ d }}</option></sc-for>
+                </select>
+                <select required="{{ true }}" style="flex: 1.5 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
+                  <option value="">Maand</option>
+                  <sc-for list="{{ maanden }}" as="m"><option value="{{ m.n }}">{{ m.naam }}</option></sc-for>
+                </select>
+                <select required="{{ true }}" style="flex: 1.1 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
+                  <option value="">Jaar</option>
+                  <sc-for list="{{ jaren }}" as="j"><option value="{{ j }}">{{ j }}</option></sc-for>
+                </select>
+              </div>
+            </div>
             <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
               Telefoonnummer
               <input type="tel" placeholder="06 12345678" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
@@ -384,7 +410,20 @@ class Component extends DCLogic {
 
     const omschrijving = ("Reunie KPJ Boekel" + (this.state.naamHoofd ? " - " + this.state.naamHoofd : "")).slice(0, 140);
 
+    const dagen = Array.from({ length: 31 }, (_, i) => i + 1);
+    const maanden = [
+      { n: 1, naam: "januari" }, { n: 2, naam: "februari" }, { n: 3, naam: "maart" },
+      { n: 4, naam: "april" }, { n: 5, naam: "mei" }, { n: 6, naam: "juni" },
+      { n: 7, naam: "juli" }, { n: 8, naam: "augustus" }, { n: 9, naam: "september" },
+      { n: 10, naam: "oktober" }, { n: 11, naam: "november" }, { n: 12, naam: "december" }
+    ];
+    const jaren = [];
+    for (let y = 2015; y >= 1930; y--) jaren.push(y);
+
     return {
+      dagen: dagen,
+      maanden: maanden,
+      jaren: jaren,
       submitted: this.state.submitted,
       aantal: this.state.aantal,
       hoofdGeslacht: this.state.hoofdGeslacht,
