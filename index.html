@@ -121,6 +121,18 @@
 
         <div style="position: relative; z-index: 1;">
           <div style="position: absolute; left: -28px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: #6B2C91;"></div>
+          <p style="margin: 0 0 10px; font-weight: 700; color: #6B2C91; font-size: 15px; text-transform: uppercase; letter-spacing: 0.05em;">1976 &middot; Aspiranten interkringkampioen</p>
+          <img src="uploads/KPJ Boekel Aspiranten interkringkampioen 070476.jpg" alt="Teamfoto van de aspiranten als interkringkampioen met beker, 7 april 1976" style="width: 100%; max-width: 480px; height: 240px; object-fit: cover; border-radius: 14px;" />
+        </div>
+
+        <div style="position: relative; z-index: 1;">
+          <div style="position: absolute; left: -28px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: #6B2C91;"></div>
+          <p style="margin: 0 0 10px; font-weight: 700; color: #6B2C91; font-size: 15px; text-transform: uppercase; letter-spacing: 0.05em;">1978 &middot; Sportdag</p>
+          <img src="uploads/02 pyramide sportdag Boekel 1978.jpg" alt="Menspiramide op de sportdag in Boekel, 1978" style="width: 100%; max-width: 480px; height: 240px; object-fit: cover; border-radius: 14px;" />
+        </div>
+
+        <div style="position: relative; z-index: 1;">
+          <div style="position: absolute; left: -28px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: #6B2C91;"></div>
           <p style="margin: 0 0 10px; font-weight: 700; color: #6B2C91; font-size: 15px; text-transform: uppercase; letter-spacing: 0.05em;">1982 &middot; Sportdag</p>
           <img src="uploads/Pyramide.jpg" alt="Piramide op de sportdag, 1982" style="width: 100%; max-width: 480px; height: 240px; object-fit: cover; border-radius: 14px;" />
         </div>
@@ -153,12 +165,47 @@
     <div style="max-width: 560px; margin: 0 auto;">
       <h2 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(28px, 4vw, 36px); color: #FFFFFF; margin: 0 0 12px; text-align: center;">Inschrijven</h2>
 
-      <!-- FORMULIER (zichtbaar vóór inschrijven) -->
-      <sc-if value="{{ !submitted }}">
-      <p style="color: #E4D5EE; text-align: center; font-size: 18px; margin: 0 0 10px;">Vul je gegevens in om je aan te melden.</p>
-      <p style="text-align: center; margin: 0 0 28px;"><span style="display: inline-block; background: #F4C430; color: #3A1A52; font-weight: 700; font-size: 18px; padding: 8px 22px; border-radius: 999px;">€10 per persoon</span></p>
+      <!-- ============ STAP 1: TICKETS ============ -->
+      <sc-if value="{{ isStap1 }}">
+        <div style="display: flex; gap: 8px; margin: 0 0 10px;">
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: #F4C430;"></div>
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.25);"></div>
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.25);"></div>
+        </div>
+        <p style="color: #E4D5EE; text-align: center; font-size: 15px; margin: 0 0 28px;">Stap 1 van 3 &middot; Tickets</p>
+
+        <div style="background: #FFFFFF; border-radius: 20px; padding: 32px 24px; display: flex; flex-direction: column; gap: 22px;">
+          <div>
+            <h3 style="font-family: 'Fraunces', serif; color: #4E1F6B; font-size: 22px; margin: 0 0 6px;">Kies je tickets</h3>
+            <p style="margin: 0; color: #6A5A75; font-size: 16px;">Deelname is €10 per persoon. Voor hoeveel personen schrijf je je in?</p>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
+            Aantal personen
+            <input type="number" min="1" max="20" value="{{ aantal }}" oninput="{{ onAantal }}" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+          </label>
+          <div style="background: #F5EFE3; border-radius: 12px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 17px;">
+            <span style="color: #4A3F4E;">Totaal ({{ aantal }} × €10)</span>
+            <strong style="color: #3A1A52; font-size: 20px;">€ {{ bedragTekst }}</strong>
+          </div>
+          <button type="button" onclick="{{ naarStap2 }}" style="background: #F4C430; color: #3A1A52; font-weight: 700; font-size: 18px; padding: 16px; border-radius: 999px; border: none; cursor: pointer;">Volgende: gegevens →</button>
+        </div>
+      </sc-if>
+
+      <!-- ============ STAP 2: GEGEVENS ============ -->
+      <sc-if value="{{ isStap2 }}">
+        <div style="display: flex; gap: 8px; margin: 0 0 10px;">
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: #F4C430;"></div>
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: #F4C430;"></div>
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.25);"></div>
+        </div>
+        <p style="color: #E4D5EE; text-align: center; font-size: 15px; margin: 0 0 28px;">Stap 2 van 3 &middot; Gegevens</p>
 
       <form onsubmit="{{ onSubmit }}" style="display: flex; flex-direction: column; gap: 18px; background: #FFFFFF; border-radius: 20px; padding: 32px 24px;">
+
+        <div style="background: #F8F5FF; border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 15px;">
+          <span style="color: #4A3F4E;">Je schrijft <strong>{{ aantal }}</strong> {{ personenLabel }} in &middot; € {{ bedragTekst }}</span>
+          <button type="button" onclick="{{ naarStap1 }}" style="background: none; border: none; color: #6B2C91; font-weight: 700; font-size: 15px; cursor: pointer; padding: 0; text-decoration: underline; white-space: nowrap;">Aantal wijzigen</button>
+        </div>
 
         <!-- Geslacht -->
         <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -173,17 +220,16 @@
           </div>
         </div>
 
-        <sc-if value="{{ hoofdIsVrouw }}">
-          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
-            Meisjesachternaam
-            <input type="text" name="meisjesachternaam" placeholder="Achternaam vóór trouwen" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
-          </label>
-        </sc-if>
-
         <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
           Voor- en achternaam
           <input type="text" name="naam" required="{{ true }}" placeholder="Voor- en achternaam" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
         </label>
+        <sc-if value="{{ hoofdIsVrouw }}">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
+            Meisjesnaam <span style="font-weight: 400; color: #6A5A75; font-size: 14px;">(indien van toepassing)</span>
+            <input type="text" name="meisjesachternaam" placeholder="Achternaam vóór trouwen" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+          </label>
+        </sc-if>
         <div style="display: flex; flex-direction: column; gap: 6px;">
           <span style="font-weight: 600; font-size: 16px;">Geboortedatum</span>
           <div style="display: flex; gap: 10px;">
@@ -208,10 +254,6 @@
         <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
           Telefoonnummer
           <input type="tel" name="telefoon" required="{{ true }}" placeholder="06 12345678" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
-        </label>
-        <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
-          Aantal personen
-          <input type="number" name="aantal" min="1" max="20" value="{{ aantal }}" oninput="{{ onAantal }}" required="{{ true }}" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
         </label>
 
         <!-- Adres hoofdaanmelder -->
@@ -247,17 +289,16 @@
               </div>
             </div>
 
-            <sc-if value="{{ p.isVrouw }}">
-              <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
-                Meisjesachternaam
-                <input type="text" placeholder="Achternaam vóór trouwen" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
-              </label>
-            </sc-if>
-
             <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
               Voor- en achternaam
               <input type="text" required="{{ true }}" placeholder="Voor- en achternaam" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
             </label>
+            <sc-if value="{{ p.isVrouw }}">
+              <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
+                Meisjesnaam <span style="font-weight: 400; color: #6A5A75; font-size: 14px;">(indien van toepassing)</span>
+                <input type="text" placeholder="Achternaam vóór trouwen" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+              </label>
+            </sc-if>
             <div style="display: flex; flex-direction: column; gap: 6px;">
               <span style="font-weight: 600; font-size: 16px;">Geboortedatum</span>
               <div style="display: flex; gap: 10px;">
@@ -275,11 +316,6 @@
                 </select>
               </div>
             </div>
-            <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
-              Telefoonnummer
-              <input type="tel" placeholder="06 12345678" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
-            </label>
-
             <label style="display: flex; align-items: center; gap: 10px; font-size: 15px;">
               <input type="checkbox" checked="{{ p.zelfdeAdres }}" onchange="{{ p.onZelfde }}" style="width: 18px; height: 18px; flex-shrink: 0;" /> Zelfde adres als de hoofdaanmelder
             </label>
@@ -317,12 +353,21 @@
           <span>Ik ga akkoord met de algemene voorwaarden en geef toestemming dat mijn gegevens worden opgeslagen en gebruikt voor de organisatie van de reünie.</span>
         </label>
 
-        <button type="submit" style="background: #F4C430; color: #3A1A52; font-weight: 700; font-size: 18px; padding: 16px; border-radius: 999px; border: none; cursor: pointer; margin-top: 8px;">Inschrijven</button>
+        <div style="display: flex; gap: 12px; margin-top: 8px;">
+          <button type="button" onclick="{{ naarStap1 }}" style="background: #F5EFE3; color: #4E1F6B; font-weight: 700; font-size: 17px; padding: 16px 20px; border-radius: 999px; border: none; cursor: pointer; white-space: nowrap;">← Vorige</button>
+          <button type="submit" style="flex: 1; background: #F4C430; color: #3A1A52; font-weight: 700; font-size: 18px; padding: 16px; border-radius: 999px; border: none; cursor: pointer;">Naar betalen →</button>
+        </div>
       </form>
       </sc-if>
 
-      <!-- BETAALPAGINA (zichtbaar ná inschrijven) -->
-      <sc-if value="{{ submitted }}">
+      <!-- ============ STAP 3: BETALEN ============ -->
+      <sc-if value="{{ isStap3 }}">
+        <div style="display: flex; gap: 8px; margin: 0 0 10px;">
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: #F4C430;"></div>
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: #F4C430;"></div>
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: #F4C430;"></div>
+        </div>
+        <p style="color: #E4D5EE; text-align: center; font-size: 15px; margin: 0 0 28px;">Stap 3 van 3 &middot; Betalen</p>
         <div style="background: #FFFFFF; border-radius: 20px; padding: 36px 24px; text-align: center;">
           <div style="width: 56px; height: 56px; border-radius: 50%; background: #E7F5EA; color: #2F7A3D; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; margin: 0 auto 16px;">✓</div>
           <h3 style="font-family: 'Fraunces', serif; color: #4E1F6B; font-size: 24px; margin: 0 0 8px;">Bedankt, {{ naamHoofd }}!</h3>
@@ -335,10 +380,13 @@
             <p style="margin: 6px 0 0; color: #6A5A75; font-size: 14px;">{{ aantal }} × €10</p>
           </div>
 
-          <sc-if value="{{ qrSrc }}">
-            <p style="font-weight: 700; color: #4E1F6B; margin: 0 0 10px;">Scan met je bankapp</p>
-            <img src="{{ qrSrc }}" alt="QR-code voor betaling" style="width: 200px; height: 200px; image-rendering: pixelated; border: 1px solid #EAE3D9; border-radius: 12px; padding: 6px; background: #FFFFFF;" />
-            <p style="margin: 18px 0 6px; color: #6A5A75;">of maak handmatig over naar:</p>
+          <sc-if value="{{ heeftBetaalverzoek }}">
+            <a href="{{ betaalverzoekUrl }}" target="_blank" rel="noopener" style="display: inline-block; background: #6B2C91; color: #FFFFFF; font-weight: 700; font-size: 18px; padding: 16px 36px; border-radius: 999px; text-decoration: none; margin: 0 0 20px;">Betaal nu via iDEAL</a>
+            <sc-if value="{{ qrSrc }}">
+              <p style="font-weight: 700; color: #4E1F6B; margin: 0 0 10px;">of scan met je bankapp of camera</p>
+              <img src="{{ qrSrc }}" alt="QR-code voor betaling via iDEAL" style="width: 200px; height: 200px; image-rendering: pixelated; border: 1px solid #EAE3D9; border-radius: 12px; padding: 6px; background: #FFFFFF;" />
+            </sc-if>
+            <p style="margin: 18px 0 6px; color: #6A5A75;">of maak het bedrag handmatig over naar:</p>
           </sc-if>
 
           <div style="text-align: left; max-width: 380px; margin: 0 auto; background: #F8F5FF; border-radius: 12px; padding: 16px 18px;">
@@ -346,7 +394,9 @@
             <p style="margin: 0 0 10px;"><span style="color: #6A5A75; font-size: 13px;">T.n.v.</span><br><strong>{{ begunstigde }}</strong></p>
             <p style="margin: 0;"><span style="color: #6A5A75; font-size: 13px;">Omschrijving</span><br><strong>{{ omschrijving }}</strong></p>
           </div>
-          <p style="margin: 16px 0 0; font-size: 13px; color: #9A87A6;">De QR-code werkt automatisch zodra het definitieve rekeningnummer is ingevuld.</p>
+          <sc-if value="{{ !heeftBetaalverzoek }}">
+            <p style="margin: 16px 0 0; font-size: 13px; color: #9A87A6;">Maak het bedrag over via je eigen bankapp. Een iDEAL-betaalknop en QR-code verschijnen zodra de betaalverzoek-link is ingevuld.</p>
+          </sc-if>
         </div>
       </sc-if>
     </div>
@@ -369,19 +419,15 @@
 const IBAN = "NL82 RABO 0177 3489 17";   // <-- vervang door het echte IBAN
 const BEGUNSTIGDE = "KPJ Boekel";        // naam op de rekening
 const PRIJS_PP = 10;                     // prijs per persoon in euro
-// ============================================================
 
-function epcPayload(iban, naam, bedrag, omschrijving) {
-  const ibanClean = String(iban).replace(/\s+/g, "").toUpperCase();
-  return [
-    "BCD", "002", "1", "SCT", "",
-    naam,
-    ibanClean,
-    "EUR" + bedrag.toFixed(2),
-    "", "",
-    omschrijving
-  ].join("\n");
-}
+// Betaalverzoek-link (iDEAL). Maak deze aan in je bank-app:
+//   Rabo-app  -> Betalen -> Betaalverzoek  (kies "bedrag laten kiezen")
+//   of Tikkie -> nieuw verzoek, open bedrag
+// Plak de link hieronder (bv. "https://betaalverzoek.rabobank.nl/..."
+// of "https://tikkie.me/pay/..."). Laat leeg als er nog geen link is;
+// dan wordt alleen het IBAN getoond, geen QR.
+const BETAALVERZOEK_URL = "";
+// ============================================================
 
 function qrDataUrl(text) {
   try {
@@ -397,12 +443,20 @@ function qrDataUrl(text) {
 
 class Component extends DCLogic {
   state = {
-    submitted: false,
+    stap: 1,          // 1 = tickets, 2 = gegevens, 3 = betalen
     aantal: 1,
     hoofdGeslacht: "",
     extra: [],        // [{ geslacht: "", zelfdeAdres: true }]
     naamHoofd: ""
   };
+
+  gaNaarStap(n) {
+    this.setState({ stap: n });
+    setTimeout(() => {
+      const sec = document.getElementById("inschrijven");
+      if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+  }
 
   setAantal(raw) {
     let a = parseInt(raw, 10);
@@ -449,7 +503,11 @@ class Component extends DCLogic {
       dagen: dagen,
       maanden: maanden,
       jaren: jaren,
-      submitted: this.state.submitted,
+      stap: this.state.stap,
+      isStap1: this.state.stap === 1,
+      isStap2: this.state.stap === 2,
+      isStap3: this.state.stap === 3,
+      personenLabel: this.state.aantal === 1 ? "persoon" : "personen",
       aantal: this.state.aantal,
       hoofdGeslacht: this.state.hoofdGeslacht,
       hoofdIsMan: this.state.hoofdGeslacht === "man",
@@ -460,19 +518,20 @@ class Component extends DCLogic {
       iban: IBAN,
       begunstigde: BEGUNSTIGDE,
       omschrijving: omschrijving,
-      qrSrc: this.state.submitted ? qrDataUrl(epcPayload(IBAN, BEGUNSTIGDE, bedrag, omschrijving)) : "",
+      betaalverzoekUrl: BETAALVERZOEK_URL,
+      heeftBetaalverzoek: !!BETAALVERZOEK_URL,
+      qrSrc: (this.state.stap === 3 && BETAALVERZOEK_URL) ? qrDataUrl(BETAALVERZOEK_URL) : "",
       onHoofdGeslacht: (e) => this.setState({ hoofdGeslacht: e.target.value }),
       onAantal: (e) => this.setAantal(e.target.value),
+      naarStap1: () => this.gaNaarStap(1),
+      naarStap2: () => this.gaNaarStap(2),
       onSubmit: (e) => {
         e.preventDefault();
         const f = e.currentTarget;
         const el = f.querySelector('input[name="naam"]');
         const naam = el ? el.value : "";
-        this.setState({ submitted: true, naamHoofd: naam });
-        setTimeout(() => {
-          const sec = document.getElementById("inschrijven");
-          if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 60);
+        this.setState({ naamHoofd: naam });
+        this.gaNaarStap(3);
       }
     };
   }
