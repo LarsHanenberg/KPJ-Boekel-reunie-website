@@ -369,13 +369,13 @@
         </div>
         <p style="color: #E4D5EE; text-align: center; font-size: 15px; margin: 0 0 28px;">Stap 3 van 3 &middot; Betalen</p>
         <div style="background: #FFFFFF; border-radius: 20px; padding: 36px 24px; text-align: center;">
-          <div style="width: 56px; height: 56px; border-radius: 50%; background: #E7F5EA; color: #2F7A3D; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; margin: 0 auto 16px;">✓</div>
-          <h3 style="font-family: 'Fraunces', serif; color: #4E1F6B; font-size: 24px; margin: 0 0 8px;">Bedankt, {{ naamHoofd }}!</h3>
-          <p style="margin: 0 0 4px; font-size: 17px;">Je inschrijving is genoteerd.</p>
-          <p style="margin: 0 0 24px; color: #6A5A75;">Rond je deelname af door het bedrag over te maken.</p>
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: #FDF2D6; color: #B7791F; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; margin: 0 auto 16px;">!</div>
+          <h3 style="font-family: 'Fraunces', serif; color: #4E1F6B; font-size: 24px; margin: 0 0 8px;">Bijna klaar, {{ voornaamHoofd }}!</h3>
+          <p style="margin: 0 0 4px; font-size: 17px;">Je gegevens zijn genoteerd.</p>
+          <p style="margin: 0 0 24px; color: #6A5A75;">Om je inschrijving <strong>definitief</strong> te maken, dien je het bedrag hieronder over te maken naar onderstaand rekeningnummer.</p>
 
           <div style="background: #F5EFE3; border-radius: 16px; padding: 20px; margin: 0 0 24px;">
-            <p style="margin: 0 0 4px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: #6B2C91; font-weight: 700;">Te betalen</p>
+            <p style="margin: 0 0 4px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: #6B2C91; font-weight: 700;">Nog over te maken</p>
             <p style="margin: 0; font-family: 'Fraunces', serif; font-size: 36px; font-weight: 700; color: #3A1A52;">€ {{ bedragTekst }}</p>
             <p style="margin: 6px 0 0; color: #6A5A75; font-size: 14px;">{{ aantal }} × €10</p>
           </div>
@@ -395,7 +395,7 @@
             <p style="margin: 0;"><span style="color: #6A5A75; font-size: 13px;">Omschrijving</span><br><strong>{{ omschrijving }}</strong></p>
           </div>
           <sc-if value="{{ !heeftBetaalverzoek }}">
-            <p style="margin: 16px 0 0; font-size: 13px; color: #9A87A6;">Maak het bedrag over via je eigen bankapp. Een iDEAL-betaalknop en QR-code verschijnen zodra de betaalverzoek-link is ingevuld.</p>
+            <p style="margin: 16px 0 0; font-size: 13px; color: #9A87A6;">Maak het bedrag over via je eigen bankapp. Vergeet niet je voor- en achternaam in de omschrijving te zetten.</p>
           </sc-if>
         </div>
       </sc-if>
@@ -487,7 +487,7 @@ class Component extends DCLogic {
       onZelfde: (e) => this.updateExtra(i, { zelfdeAdres: e.target.checked })
     }));
 
-    const omschrijving = ("Reunie KPJ Boekel" + (this.state.naamHoofd ? " - " + this.state.naamHoofd : "")).slice(0, 140);
+    const omschrijving = (this.state.naamHoofd || "").slice(0, 140);
 
     const dagen = Array.from({ length: 31 }, (_, i) => i + 1);
     const maanden = [
@@ -515,6 +515,7 @@ class Component extends DCLogic {
       extra: extra,
       bedragTekst: bedrag.toFixed(2).replace(".", ","),
       naamHoofd: this.state.naamHoofd,
+      voornaamHoofd: (this.state.naamHoofd || "").trim().split(/\s+/)[0],
       iban: IBAN,
       begunstigde: BEGUNSTIGDE,
       omschrijving: omschrijving,
