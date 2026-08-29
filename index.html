@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 <script src="./qrcode.js"></script>
+<!-- ============================================================
+     Supabase-verbinding — vul hier je eigen project in.
+     Deze sleutel is een PUBLIEKE sleutel en mag hier staan:
+     dankzij de databasebeveiliging (RLS) kan er alleen mee
+     ingeschreven worden, niets uitgelezen of gewijzigd.
+     ============================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  window.SUPABASE_URL = "https://mkvehiclydvfvmuswkem.supabase.co";
+  window.SUPABASE_KEY = "sb_publishable_7_7vxiOvIV-Omt7NDOVAJw_gSyYKcn8";
+  window.supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_KEY);
+</script>
 </head>
 <body>
 <x-dc>
@@ -295,26 +307,26 @@
 
             <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
               Voor- en achternaam
-              <input type="text" required="{{ true }}" placeholder="Voor- en achternaam" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+              <input type="text" name="naam_p{{ p.nr }}" required="{{ true }}" placeholder="Voor- en achternaam" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
             </label>
             <sc-if value="{{ p.isVrouw }}">
               <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
                 Meisjesachternaam <span style="font-weight: 400; color: #6A5A75; font-size: 14px;">(indien van toepassing)</span>
-                <input type="text" placeholder="Achternaam vóór trouwen" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+                <input type="text" name="meisjes_p{{ p.nr }}" placeholder="Achternaam vóór trouwen" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
               </label>
             </sc-if>
             <div style="display: flex; flex-direction: column; gap: 6px;">
               <span style="font-weight: 600; font-size: 16px;">Geboortedatum</span>
               <div style="display: flex; gap: 10px;">
-                <select required="{{ true }}" style="flex: 1 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
+                <select name="gebdag_p{{ p.nr }}" required="{{ true }}" style="flex: 1 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
                   <option value="">Dag</option>
                   <sc-for list="{{ dagen }}" as="d"><option value="{{ d }}">{{ d }}</option></sc-for>
                 </select>
-                <select required="{{ true }}" style="flex: 1.5 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
+                <select name="gebmaand_p{{ p.nr }}" required="{{ true }}" style="flex: 1.5 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
                   <option value="">Maand</option>
                   <sc-for list="{{ maanden }}" as="m"><option value="{{ m.n }}">{{ m.naam }}</option></sc-for>
                 </select>
-                <select required="{{ true }}" style="flex: 1.1 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
+                <select name="gebjaar_p{{ p.nr }}" required="{{ true }}" style="flex: 1.1 1 0; min-width: 0; font-size: 17px; padding: 12px 10px; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #2A2230;">
                   <option value="">Jaar</option>
                   <sc-for list="{{ jaren }}" as="j"><option value="{{ j }}">{{ j }}</option></sc-for>
                 </select>
@@ -329,16 +341,16 @@
                 <div style="display: flex; flex-wrap: wrap; gap: 12px;">
                   <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px; flex: 2 1 200px;">
                     Straatnaam en huisnummer
-                    <input type="text" required="{{ true }}" placeholder="Kerkstraat 12" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+                    <input type="text" name="straat_p{{ p.nr }}" required="{{ true }}" placeholder="Kerkstraat 12" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
                   </label>
                   <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px; flex: 1 1 130px;">
                     Postcode
-                    <input type="text" required="{{ true }}" placeholder="5427 AB" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+                    <input type="text" name="postcode_p{{ p.nr }}" required="{{ true }}" placeholder="5427 AB" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
                   </label>
                 </div>
                 <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
                   Woonplaats
-                  <input type="text" required="{{ true }}" placeholder="Boekel" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+                  <input type="text" name="woonplaats_p{{ p.nr }}" required="{{ true }}" placeholder="Boekel" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
                 </label>
               </div>
             </sc-if>
@@ -530,13 +542,70 @@ class Component extends DCLogic {
       onAantal: (e) => this.setAantal(e.target.value),
       naarStap1: () => this.gaNaarStap(1),
       naarStap2: () => this.gaNaarStap(2),
-      onSubmit: (e) => {
+      onSubmit: async (e) => {
         e.preventDefault();
         const f = e.currentTarget;
-        const el = f.querySelector('input[name="naam"]');
-        const naam = el ? el.value : "";
+        const submitBtn = f.querySelector('button[type="submit"]');
+        const fd = new FormData(f);
+        const g = (n) => (fd.get(n) || "").toString().trim();
+        const pad = (v) => String(v).padStart(2, "0");
+        const maakDatum = (d, m, j) => (d && m && j) ? (j + "-" + pad(m) + "-" + pad(d)) : "";
+
+        const naam = g("naam");
         this.setState({ naamHoofd: naam });
-        this.gaNaarStap(3);
+
+        const hoofdStraat = g("straat");
+        const hoofdPostcode = g("postcode");
+        const hoofdPlaats = g("woonplaats");
+
+        // Hoofdaanmelder als eerste deelnemer
+        const deelnemers = [{
+          is_hoofdaanmelder: true,
+          geslacht: g("geslacht_hoofd"),
+          naam: naam,
+          meisjesnaam: g("meisjesachternaam"),
+          geboortedatum: maakDatum(g("geb_dag"), g("geb_maand"), g("geb_jaar")),
+          straat: hoofdStraat,
+          postcode: hoofdPostcode,
+          woonplaats: hoofdPlaats
+        }];
+
+        // Extra personen
+        this.state.extra.forEach((p, i) => {
+          const nr = i + 2;
+          const zelfde = p.zelfdeAdres;
+          deelnemers.push({
+            is_hoofdaanmelder: false,
+            geslacht: g("geslacht_p" + i),
+            naam: g("naam_p" + nr),
+            meisjesnaam: g("meisjes_p" + nr),
+            geboortedatum: maakDatum(g("gebdag_p" + nr), g("gebmaand_p" + nr), g("gebjaar_p" + nr)),
+            straat: zelfde ? hoofdStraat : g("straat_p" + nr),
+            postcode: zelfde ? hoofdPostcode : g("postcode_p" + nr),
+            woonplaats: zelfde ? hoofdPlaats : g("woonplaats_p" + nr)
+          });
+        });
+
+        const payload = {
+          aantal: this.state.aantal,
+          bedrag: this.state.aantal * PRIJS_PP,
+          email: g("email"),
+          telefoon: g("telefoon"),
+          akkoord_voorwaarden: !!fd.get("voorwaarden"),
+          deelnemers: deelnemers
+        };
+
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Bezig met opslaan…"; }
+        try {
+          const { error } = await window.supabaseClient.rpc("nieuwe_inschrijving", { payload: payload });
+          if (error) throw error;
+          this.gaNaarStap(3);
+        } catch (err) {
+          console.error("Opslaan mislukt:", err);
+          alert("Er ging iets mis bij het opslaan van je inschrijving. Controleer je internetverbinding en probeer het opnieuw. Blijft het misgaan? Mail dan kpjboekel@gmail.com.");
+        } finally {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Naar betalen →"; }
+        }
       }
     };
   }
