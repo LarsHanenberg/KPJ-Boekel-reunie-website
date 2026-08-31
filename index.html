@@ -197,7 +197,11 @@
           </div>
           <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 16px;">
             Aantal personen
-            <input type="number" min="1" max="20" value="{{ aantal }}" oninput="{{ onAantal }}" style="width: 100%; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 1px solid #D9CFE0;" />
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <button type="button" onclick="{{ onMinus }}" aria-label="Eén minder" style="width: 48px; height: 48px; font-size: 26px; line-height: 1; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #4E1F6B; cursor: pointer; flex: none;">−</button>
+              <span aria-live="polite" style="min-width: 44px; text-align: center; font-size: 22px; font-weight: 700; color: #3A1A52;">{{ aantal }}</span>
+              <button type="button" onclick="{{ onPlus }}" aria-label="Eén meer" style="width: 48px; height: 48px; font-size: 26px; line-height: 1; border-radius: 10px; border: 1px solid #D9CFE0; background: #FFFFFF; color: #4E1F6B; cursor: pointer; flex: none;">+</button>
+            </div>
           </label>
           <div style="background: #F5EFE3; border-radius: 12px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 17px;">
             <span style="color: #4A3F4E;">Totaal ({{ aantal }} × €10)</span>
@@ -432,7 +436,7 @@
 // ============================================================
 //  INSTELLINGEN — pas hier het rekeningnummer aan
 // ============================================================
-const IBAN = "NL82 RABO 0177 3489 17";   // <-- vervang door het echte IBAN
+const IBAN = "NL82 RABO 0177 3489 17";   // Rekeningnummer
 const BEGUNSTIGDE = "KPJ Boekel";        // naam op de rekening
 const PRIJS_PP = 10;                     // prijs per persoon in euro
 
@@ -540,6 +544,8 @@ class Component extends DCLogic {
       qrSrc: (this.state.stap === 3 && BETAALVERZOEK_URL) ? qrDataUrl(BETAALVERZOEK_URL) : "",
       onHoofdGeslacht: (e) => this.setState({ hoofdGeslacht: e.target.value }),
       onAantal: (e) => this.setAantal(e.target.value),
+      onMinus: () => this.setAantal(this.state.aantal - 1),
+      onPlus: () => this.setAantal(this.state.aantal + 1),
       naarStap1: () => this.gaNaarStap(1),
       naarStap2: () => this.gaNaarStap(2),
       onSubmit: async (e) => {
