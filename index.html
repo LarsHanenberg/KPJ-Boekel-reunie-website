@@ -30,7 +30,6 @@
   gtag('config', 'G-6RD6Z8CGVG');
 </script>
 <script src="./support.js"></script>
-<script src="./qrcode.js"></script>
 <!-- ============================================================
      Supabase-verbinding — vul hier je eigen project in.
      Deze sleutel is een PUBLIEKE sleutel en mag hier staan:
@@ -64,12 +63,14 @@
 
   <!-- HEADER -->
   <header style="position: sticky; top: 0; z-index: 20; background: #FFFDF9; border-bottom: 1px solid #EAE3D9; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-    <img src="uploads/Logo.jpg" alt="Logo KPJ Boekel" style="height: 40px; width: auto; object-fit: contain;" />
+    <img src="uploads/Logo.jpg" alt="Logo KPJ Boekel" width="240" height="169" style="height: 40px; width: auto; object-fit: contain;" />
     <div style="display: flex; align-items: center; gap: 16px;">
       <a href="mailto:kpjboekel@gmail.com" style="color: #6B2C91; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap;">Contact</a>
       <a href="#inschrijven" style="background: #6B2C91; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 10px 18px; border-radius: 999px; text-decoration: none; white-space: nowrap;">Schrijf je in</a>
     </div>
   </header>
+
+  <main>
 
   <!-- HERO -->
   <section style="position: relative; min-height: 88vh; display: flex; align-items: flex-end; background: linear-gradient(0deg, rgba(20,10,30,0.78) 0%, rgba(20,10,30,0.35) 55%, rgba(20,10,30,0.15) 100%), url('uploads/Pyramide.jpg') center 20% / cover no-repeat;">
@@ -428,31 +429,24 @@
             <p style="margin: 6px 0 0; color: #6A5A75; font-size: 14px;">{{ aantal }} × €10</p>
           </div>
 
-          <sc-if value="{{ heeftBetaalverzoek }}">
-            <a href="{{ betaalverzoekUrl }}" target="_blank" rel="noopener" style="display: inline-block; background: #6B2C91; color: #FFFFFF; font-weight: 700; font-size: 18px; padding: 16px 36px; border-radius: 999px; text-decoration: none; margin: 0 0 20px;">Betaal nu via iDEAL</a>
-            <sc-if value="{{ qrSrc }}">
-              <p style="font-weight: 700; color: #4E1F6B; margin: 0 0 10px;">of scan met je bankapp of camera</p>
-              <img src="{{ qrSrc }}" alt="QR-code voor betaling via iDEAL" style="width: 200px; height: 200px; image-rendering: pixelated; border: 1px solid #EAE3D9; border-radius: 12px; padding: 6px; background: #FFFFFF;" />
-            </sc-if>
-            <p style="margin: 18px 0 6px; color: #6A5A75;">of maak het bedrag handmatig over naar:</p>
-          </sc-if>
+          <p style="margin: 0 0 6px; color: #6A5A75;">Maak het bedrag over naar:</p>
 
           <div style="text-align: left; max-width: 380px; margin: 0 auto; background: #F8F5FF; border-radius: 12px; padding: 16px 18px;">
             <p style="margin: 0 0 10px;"><span style="color: #6A5A75; font-size: 13px;">IBAN</span><br><strong style="font-size: 18px; letter-spacing: 0.02em;">{{ iban }}</strong></p>
             <p style="margin: 0 0 10px;"><span style="color: #6A5A75; font-size: 13px;">T.n.v.</span><br><strong>{{ begunstigde }}</strong></p>
             <p style="margin: 0;"><span style="color: #6A5A75; font-size: 13px;">Omschrijving</span><br><strong>{{ omschrijving }}</strong></p>
           </div>
-          <sc-if value="{{ !heeftBetaalverzoek }}">
-            <p style="margin: 16px 0 0; font-size: 13px; color: #9A87A6;">Maak het bedrag over via je eigen bankapp. Vergeet niet je voor- en achternaam in de omschrijving te zetten.</p>
-          </sc-if>
+          <p style="margin: 16px 0 0; font-size: 13px; color: #9A87A6;">Maak het bedrag over via je eigen bankapp. Vergeet niet je voor- en achternaam in de omschrijving te zetten.</p>
         </div>
       </sc-if>
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer style="background: #2A1440; color: #C9B8D4; padding: 40px 24px; text-align: center;">
-    <img src="uploads/Logo.jpg" alt="Logo KPJ Boekel" style="height: 36px; width: auto; object-fit: contain; filter: grayscale(1) brightness(2); margin-bottom: 16px;" />
+    <img src="uploads/Logo.jpg" alt="Logo KPJ Boekel" width="240" height="169" style="height: 36px; width: auto; object-fit: contain; filter: grayscale(1) brightness(2); margin-bottom: 16px;" />
     <p style="margin: 0 0 6px; font-size: 16px;">Vragen? Mail naar <a href="mailto:kpjboekel@gmail.com" style="color: #F4C430;">kpjboekel@gmail.com</a></p>
     <p style="margin: 0; font-size: 14px; color: #9A87A6;">Georganiseerd door en voor oud-leden van Handbalclub KPJ Boekel</p>
   </footer>
@@ -467,27 +461,7 @@
 const IBAN = "NL82 RABO 0177 3489 17";   // Rekeningnummer
 const BEGUNSTIGDE = "KPJ Boekel";        // naam op de rekening
 const PRIJS_PP = 10;                     // prijs per persoon in euro
-
-// Betaalverzoek-link (iDEAL). Maak deze aan in je bank-app:
-//   Rabo-app  -> Betalen -> Betaalverzoek  (kies "bedrag laten kiezen")
-//   of Tikkie -> nieuw verzoek, open bedrag
-// Plak de link hieronder (bv. "https://betaalverzoek.rabobank.nl/..."
-// of "https://tikkie.me/pay/..."). Laat leeg als er nog geen link is;
-// dan wordt alleen het IBAN getoond, geen QR.
-const BETAALVERZOEK_URL = "";
 // ============================================================
-
-function qrDataUrl(text) {
-  try {
-    if (typeof window === "undefined" || !window.qrcode) return "";
-    const qr = window.qrcode(0, "M");
-    qr.addData(text);
-    qr.make();
-    return qr.createDataURL(5, 4);
-  } catch (e) {
-    return "";
-  }
-}
 
 class Component extends DCLogic {
   state = {
@@ -567,9 +541,6 @@ class Component extends DCLogic {
       iban: IBAN,
       begunstigde: BEGUNSTIGDE,
       omschrijving: omschrijving,
-      betaalverzoekUrl: BETAALVERZOEK_URL,
-      heeftBetaalverzoek: !!BETAALVERZOEK_URL,
-      qrSrc: (this.state.stap === 3 && BETAALVERZOEK_URL) ? qrDataUrl(BETAALVERZOEK_URL) : "",
       onHoofdGeslacht: (e) => this.setState({ hoofdGeslacht: e.target.value }),
       onAantal: (e) => this.setAantal(e.target.value),
       onMinus: () => this.setAantal(this.state.aantal - 1),
