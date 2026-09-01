@@ -35,12 +35,29 @@
      Deze sleutel is een PUBLIEKE sleutel en mag hier staan:
      dankzij de databasebeveiliging (RLS) kan er alleen mee
      ingeschreven worden, niets uitgelezen of gewijzigd.
+
+     De bibliotheek wordt pas geladen op het moment dat iemand
+     zich inschrijft (lazy load), zodat de pagina sneller opent.
      ============================================================ -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   window.SUPABASE_URL = "https://mkvehiclydvfvmuswkem.supabase.co";
   window.SUPABASE_KEY = "sb_publishable_7_7vxiOvIV-Omt7NDOVAJw_gSyYKcn8";
-  window.supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_KEY);
+  window.getSupabaseClient = function () {
+    if (window.supabaseClient) return Promise.resolve(window.supabaseClient);
+    if (!window._supabaseLoad) {
+      window._supabaseLoad = new Promise(function (resolve, reject) {
+        var s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+        s.onload = function () {
+          window.supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_KEY);
+          resolve(window.supabaseClient);
+        };
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+    return window._supabaseLoad;
+  };
 </script>
 </head>
 <body>
@@ -602,7 +619,8 @@ class Component extends DCLogic {
 
         if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Bezig met opslaan…"; }
         try {
-          const { error } = await window.supabaseClient.rpc("nieuwe_inschrijving", { payload: payload });
+          const client = await window.getSupabaseClient();
+          const { error } = await client.rpc("nieuwe_inschrijving", { payload: payload });
           if (error) throw error;
           this.gaNaarStap(3);
         } catch (err) {
