@@ -453,7 +453,32 @@
             <p style="margin: 0 0 10px;"><span style="color: #6A5A75; font-size: 13px;">T.n.v.</span><br><strong>{{ begunstigde }}</strong><br><span style="color: #6A5A75; font-size: 13px;">penningmeester van KPJ Boekel</span></p>
             <p style="margin: 0;"><span style="color: #6A5A75; font-size: 13px;">Omschrijving</span><br><strong>{{ omschrijving }}</strong></p>
           </div>
-          <p style="margin: 16px 0 0; font-size: 13px; color: #9A87A6;">Het bedrag wordt overgemaakt naar de penningmeester van KPJ Boekel. In je bankapp verschijnt daarom de naam <strong>PJMM Tielemans</strong> als ontvanger — dat klopt. Maak het bedrag over via je eigen bankapp en vergeet niet je voor- en achternaam in de omschrijving te zetten.</p>
+          <p style="margin: 16px 0 20px; font-size: 13px; color: #9A87A6;">Het bedrag wordt overgemaakt naar de penningmeester van KPJ Boekel. In je bankapp verschijnt daarom de naam <strong>PJMM Tielemans</strong> als ontvanger — dat klopt. Maak het bedrag over via je eigen bankapp en vergeet niet je voor- en achternaam in de omschrijving te zetten.</p>
+
+          <button type="button" onclick="{{ onBetaald }}" style="width: 100%; background: #F4C430; color: #3A1A52; font-weight: 700; font-size: 18px; padding: 16px; border-radius: 999px; border: none; cursor: pointer;">Ik heb het bedrag overgemaakt ✓</button>
+          <p style="margin: 10px 0 0; font-size: 12px; color: #9A87A6;">Klik hierop nadat je de overboeking hebt gedaan.</p>
+        </div>
+      </sc-if>
+
+      <!-- ============ STAP 4: BEVESTIGD ============ -->
+      <sc-if value="{{ isBetaald }}">
+        <div style="display: flex; gap: 8px; margin: 0 0 10px;">
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: #F4C430;"></div>
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: #F4C430;"></div>
+          <div style="flex: 1; height: 6px; border-radius: 999px; background: #F4C430;"></div>
+        </div>
+        <p style="color: #E4D5EE; text-align: center; font-size: 15px; margin: 0 0 28px;">Klaar &middot; Tot 10 april 2027!</p>
+        <div style="background: #FFFFFF; border-radius: 20px; padding: 36px 24px; text-align: center;">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: #E4F6E4; color: #2E7D32; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; margin: 0 auto 16px;">✓</div>
+          <h3 style="font-family: 'Fraunces', serif; color: #4E1F6B; font-size: 24px; margin: 0 0 8px;">Bedankt, {{ voornaamHoofd }}!</h3>
+          <p style="margin: 0 0 4px; font-size: 17px;">Je aanmelding is bij ons binnen.</p>
+          <p style="margin: 0 0 24px; color: #6A5A75;">Zodra de penningmeester je betaling heeft ontvangen, is je inschrijving <strong>definitief</strong>. Je hoeft verder niets meer te doen.</p>
+
+          <div style="background: #F8F5FF; border-radius: 16px; padding: 20px; margin: 0 0 8px; text-align: left;">
+            <p style="margin: 0 0 8px; font-weight: 700; color: #6B2C91;">Wat gebeurt er nu?</p>
+            <p style="margin: 0 0 8px; color: #4A3F4E; font-size: 15px;">In de aanloop naar de reünie word je toegevoegd aan de <strong>WhatsApp-groep</strong> van het feest. Daar delen we het programma, updates en alle laatste nieuwtjes.</p>
+          </div>
+          <p style="margin: 16px 0 0; font-size: 13px; color: #9A87A6;">Klopt er iets niet of heb je een vraag? Mail naar <a href="mailto:kpjboekel@gmail.com" style="color: #6B2C91; font-weight: 600;">kpjboekel@gmail.com</a>.</p>
         </div>
       </sc-if>
     </div>
@@ -486,8 +511,17 @@ class Component extends DCLogic {
     aantal: 1,
     hoofdGeslacht: "",
     extra: [],        // [{ geslacht: "", zelfdeAdres: true }]
-    naamHoofd: ""
+    naamHoofd: "",
+    betaald: false    // true zodra de gebruiker aangeeft te hebben overgemaakt
   };
+
+  bevestigBetaling() {
+    this.setState({ betaald: true });
+    setTimeout(() => {
+      const sec = document.getElementById("inschrijven");
+      if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+  }
 
   gaNaarStap(n) {
     this.setState({ stap: n });
@@ -545,7 +579,8 @@ class Component extends DCLogic {
       stap: this.state.stap,
       isStap1: this.state.stap === 1,
       isStap2: this.state.stap === 2,
-      isStap3: this.state.stap === 3,
+      isStap3: this.state.stap === 3 && !this.state.betaald,
+      isBetaald: this.state.stap === 3 && this.state.betaald,
       personenLabel: this.state.aantal === 1 ? "persoon" : "personen",
       aantal: this.state.aantal,
       hoofdGeslacht: this.state.hoofdGeslacht,
@@ -564,6 +599,7 @@ class Component extends DCLogic {
       onPlus: () => this.setAantal(this.state.aantal + 1),
       naarStap1: () => this.gaNaarStap(1),
       naarStap2: () => this.gaNaarStap(2),
+      onBetaald: () => this.bevestigBetaling(),
       onSubmit: async (e) => {
         e.preventDefault();
         const f = e.currentTarget;
