@@ -534,7 +534,7 @@ class Component extends DCLogic {
   setAantal(raw) {
     let a = parseInt(raw, 10);
     if (isNaN(a) || a < 1) a = 1;
-    if (a > 20) a = 20;
+    if (a > 2) a = 2;
     const nExtra = a - 1;
     const extra = this.state.extra.slice(0, nExtra);
     while (extra.length < nExtra) extra.push({ geslacht: "", zelfdeAdres: true });
