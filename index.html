@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- SEO -->
-<title>Reünie Handbalclub KPJ Boekel · 10 april 2027</title>
+<title>Reünie KPJ Boekel · 10 april 2027</title>
 <meta name="description" content="Reünie van Handbalclub KPJ Boekel op zaterdag 10 april 2027 bij Het Boekels Ven in Boekel. Schrijf je in en ontmoet je oude teamgenoten van KPJ Boekel weer.">
 <link rel="canonical" href="https://kpjboekel.nl/">
 <link rel="icon" type="image/png" sizes="192x192" href="/uploads/favicon.png">
@@ -12,7 +12,7 @@
 <!-- Open Graph / social -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Reünie KPJ Boekel">
-<meta property="og:title" content="Reünie Handbalclub KPJ Boekel · 10 april 2027">
+<meta property="og:title" content="Reünie KPJ Boekel · 10 april 2027">
 <meta property="og:description" content="Zaterdag 10 april 2027 bij Het Boekels Ven in Boekel. Schrijf je in en ontmoet je oude teamgenoten van KPJ Boekel weer.">
 <meta property="og:url" content="https://kpjboekel.nl/">
 <meta property="og:image" content="https://kpjboekel.nl/uploads/Logo.jpg">
@@ -490,7 +490,7 @@
   <footer style="background: #2A1440; color: #C9B8D4; padding: 40px 24px; text-align: center;">
     <img src="uploads/Logo.jpg" alt="Logo KPJ Boekel" width="240" height="169" style="height: 36px; width: auto; object-fit: contain; filter: grayscale(1) brightness(2); margin-bottom: 16px;" />
     <p style="margin: 0 0 6px; font-size: 16px;">Vragen? Mail naar <a href="mailto:kpjboekel@gmail.com" style="color: #F4C430;">kpjboekel@gmail.com</a></p>
-    <p style="margin: 0; font-size: 14px; color: #9A87A6;">Georganiseerd door en voor oud-leden van Handbalclub KPJ Boekel</p>
+    <p style="margin: 0; font-size: 14px; color: #9A87A6;">Georganiseerd door en voor oud-leden van KPJ Boekel</p>
   </footer>
 
 </div>
@@ -534,7 +534,7 @@ class Component extends DCLogic {
   setAantal(raw) {
     let a = parseInt(raw, 10);
     if (isNaN(a) || a < 1) a = 1;
-    if (a > 2) a = 2;
+    if (a > 20) a = 20;
     const nExtra = a - 1;
     const extra = this.state.extra.slice(0, nExtra);
     while (extra.length < nExtra) extra.push({ geslacht: "", zelfdeAdres: true });
