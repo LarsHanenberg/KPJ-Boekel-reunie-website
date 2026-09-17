@@ -475,6 +475,13 @@
           <p style="margin: 0 0 4px; font-size: 17px;">Je aanmelding is bij ons binnen.</p>
           <p style="margin: 0 0 24px; color: #6A5A75;">Zodra de penningmeester je betaling heeft ontvangen, is je inschrijving <strong>definitief</strong>. Je hoeft verder niets meer te doen.</p>
 
+          <div style="background: #FDF7E3; border: 1px solid #F0DFA6; border-radius: 16px; padding: 20px; margin: 0 0 16px; text-align: left;">
+            <p style="margin: 0 0 4px; font-weight: 700; color: #B7791F;">Nog niet overgemaakt?</p>
+            <p style="margin: 0 0 14px; color: #6A5A75; font-size: 15px;">Je inschrijving is pas definitief ná de betaling. Heb je de pagina gemist om het bedrag over te maken? Ga terug naar de betaalpagina om het rekeningnummer en de omschrijving opnieuw te zien.</p>
+            <button type="button" onclick="{{ onTerugNaarBetalen }}" style="width: 100%; background: #FFFFFF; color: #6B2C91; font-weight: 700; font-size: 16px; padding: 14px; border-radius: 999px; border: 2px solid #6B2C91; cursor: pointer;">← Terug naar de betaalpagina</button>
+            <p style="margin: 12px 0 0; font-size: 13px; color: #9A87A6;">Al betaald? Dan hoef je hier niets meer mee te doen.</p>
+          </div>
+
           <div style="background: #F8F5FF; border-radius: 16px; padding: 20px; margin: 0 0 8px; text-align: left;">
             <p style="margin: 0 0 8px; font-weight: 700; color: #6B2C91;">Wat gebeurt er nu?</p>
             <p style="margin: 0 0 8px; color: #4A3F4E; font-size: 15px;">In de aanloop naar de reünie word je toegevoegd aan de <strong>WhatsApp-groep</strong> van het feest. Daar zal de overige informatie nog worden gedeeld.</p>
@@ -518,6 +525,14 @@ class Component extends DCLogic {
 
   bevestigBetaling() {
     this.setState({ betaald: true });
+    setTimeout(() => {
+      const sec = document.getElementById("inschrijven");
+      if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+  }
+
+  terugNaarBetalen() {
+    this.setState({ betaald: false });
     setTimeout(() => {
       const sec = document.getElementById("inschrijven");
       if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -601,6 +616,7 @@ class Component extends DCLogic {
       naarStap1: () => this.gaNaarStap(1),
       naarStap2: () => this.gaNaarStap(2),
       onBetaald: () => this.bevestigBetaling(),
+      onTerugNaarBetalen: () => this.terugNaarBetalen(),
       onSubmit: async (e) => {
         e.preventDefault();
         const f = e.currentTarget;
